@@ -25,7 +25,9 @@ const database = {
         { id: 4, metal: "Platinum", price: 795.45 },
         { id: 5, metal: "Palladium", price: 1241.0 }
     ],
-    Orders: [
+  
+    orders: [
+
         {
             id: 1,
             metalId: 3,
