@@ -25,7 +25,7 @@ const database = {
         { id: 4, metal: "Platinum", price: 795.45 },
         { id: 5, metal: "Palladium", price: 1241.0 }
     ],
-    customOrders: [
+    orders: [
         {
             id: 1,
             metalId: 3,
@@ -37,6 +37,15 @@ const database = {
 }
 
 export const getMetals = () => {
-    return database.metals.map(metal => ({...metal}))
+    return database.metals.map(metal => ({ ...metal }))
+}
+export const getSizes = () => {
+    return database.sizes.map(size => ({ ...size }))
+}
+export const getStyles = () => {
+    return database.styles.map(style => ({ ...style }))
+}
+export const getOrders = () => {
+    return database.orders.map(orders => ({ ...orders }))
 }
 
