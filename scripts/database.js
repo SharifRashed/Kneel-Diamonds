@@ -6,11 +6,6 @@
 
 */
 const database = {
-
-    //When a person is providing input in your application, you need to store that input - keep track of it. In this application, when the user chooses one of the radio buttons, they are changing the state of the application.
-    //You need a place to store that state. State is always stored in your database, or data store, for your application.
-    orderBuilder: {},
-
     styles: [
         { id: 1, style: "Classic", price: 500 },
         { id: 2, style: "Modern", price: 710 },
@@ -30,9 +25,7 @@ const database = {
         { id: 4, metal: "Platinum", price: 795.45 },
         { id: 5, metal: "Palladium", price: 1241.0 }
     ],
-
-    orders: [
-
+    customOrders: [
         {
             id: 1,
             metalId: 3,
@@ -40,7 +33,8 @@ const database = {
             styleId: 3,
             timestamp: 1614659931693
         }
-    ]
+    ],
+    orderBuilder: {},
 }
 
 export const getMetals = () => {
@@ -53,8 +47,11 @@ export const getStyles = () => {
     return database.styles.map(style => ({ ...style }))
 }
 export const getOrders = () => {
-    return database.orders.map(orders => ({ ...orders }))
+    return database.customOrders.map(order => ({ ...order }))
 }
+// export const getJewelryTypes = () => {
+//     return database.jewelryTypes.map(jewelryTypes => ({ ...jewelryTypes }))
+//}
 export const setMetal = (id) => {
     database.orderBuilder.metalId = id
 }
@@ -66,23 +63,19 @@ export const setSize = (id) => {
 export const setStyle = (id) => {
     database.orderBuilder.styleId = id
 }
+
 export const addCustomOrder = () => {
-    // Copy the current state of user choices
     const newOrder = { ...database.orderBuilder }
 
-    // Add a new primary key to the object
     const lastIndex = database.customOrders.length - 1
     newOrder.id = database.customOrders[lastIndex].id + 1
 
-    // Add a timestamp to the order
     newOrder.timestamp = Date.now()
 
-    // Add the new order object to custom orders state
     database.customOrders.push(newOrder)
 
-    // Reset the temporary state for user choices
     database.orderBuilder = {}
 
-    // Broadcast a notification that permanent state has changed
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
+
